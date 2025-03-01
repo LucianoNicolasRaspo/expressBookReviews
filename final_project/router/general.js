@@ -4,7 +4,6 @@ let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
-
 public_users.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -12,8 +11,6 @@ public_users.post("/register", (req, res) => {
   if (username && password) {
     if (!isValid(username)) {
       users.push({ "username": username, "password": password });
-
-      console.log("Usuarios después del registro:", users); // <-- Depuración
 
       return res.status(201).json({ message: "User successfully registered. Now you can login" });
     } else {
@@ -88,4 +85,5 @@ public_users.get('/review/:isbn',function (req, res) {
 
   res.json(book.reviews);
 });
+
 module.exports.general = public_users;
